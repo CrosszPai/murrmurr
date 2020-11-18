@@ -23,7 +23,7 @@ function PostCard(props: PostCardProps) {
       }}
       className={styles["card-container"]}
     >
-      <p>{props.content}</p>
+      <p className="break-all">{props.content}</p>
       <div>
         <div className="text-gray-10 text-sm">
           {moment(props.createAt).fromNow()}

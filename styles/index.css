@@ -8,7 +8,9 @@
   background: #282828;
   @apply flex flex-col overflow-hidden;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 .brand {
   @apply text-white text-2xl font-medium;
 }
