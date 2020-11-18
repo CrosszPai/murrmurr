@@ -19,8 +19,8 @@ export default function IndexPage() {
       .collection("post")
       .where("campus", "==", localStorage.getItem("cmp"))
       .onSnapshot((snap) => {
-        setPosts(
-          snap.docs
+        setPosts(() => {
+          let temp = snap.docs
             .map((val) => {
               if (val.data().createAt !== null) {
                 return {
@@ -31,8 +31,12 @@ export default function IndexPage() {
               }
               return null;
             })
-            .filter((v) => v !== null)
-        );
+            .filter((v) => v !== null);
+          temp.sort((a, b) => {
+            return a.createAt.valueOf() - b.createAt.valueOf();
+          });
+          return temp;
+        });
       });
   }, []);
   return (

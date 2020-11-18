@@ -53,7 +53,7 @@ function Write() {
           POST
         </h4>
       </motion.nav>
-      <div className="flex-auto p-4">
+      <div className="flex-auto flex flex-col p-4">
         <textarea
           onChange={onChange}
           ref={textRef}
@@ -63,7 +63,7 @@ function Write() {
           }}
           className="text-gray-10 bg-transparent outline-none w-full resize-none"
         />
-        <div className="float-right text-mint-100">{len}/200</div>
+        <div className="mt-auto ml-auto text-mint-100">{len}/200</div>
       </div>
     </>
   );
