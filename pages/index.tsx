@@ -32,7 +32,7 @@ export default function IndexPage() {
               return null;
             })
             .filter((v) => v !== null);
-          temp.sort((a, b) => {
+          temp.sort((b, a) => {
             return a.createAt.valueOf() - b.createAt.valueOf();
           });
           return temp;
