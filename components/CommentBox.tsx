@@ -22,14 +22,17 @@ const CommentBox = React.forwardRef(
         }}
         className="fixed flex flex-col w-screen rounded-t-3xl p-4 bg-gray-80"
       >
-        <textarea
-          onChange={onChange}
-          ref={textRef}
-          maxLength={200}
-          placeholder="Add a comment..."
-          className={styles["comment-box"]}
-        />
-        <div className="ml-auto mt-auto text-mint-100">{len}/200</div>
+        <div className="flex">
+          <textarea
+            onChange={onChange}
+            ref={textRef}
+            maxLength={200}
+            placeholder="Add a comment..."
+            className={styles["comment-box"]}
+          />
+          <button disabled={!isToggle} style={{height:'fit-content'}}><i aria-hidden className="fas mt-2 text-mint-100 fa-paper-plane"></i></button>
+        </div>
+        <div className="ml-auto mt-auto text-mint-100 transform -translate-y-4">{len}/200</div>
       </motion.div>
     );
   }

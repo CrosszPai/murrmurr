@@ -1,8 +1,12 @@
+import { useRouter } from 'next/router';
 import styles from './index.module.css'
 
 function PostCard() {
+  const Router = useRouter()
   return (
-    <div className={styles["card-container"]}>
+    <div onClick={()=>{
+      Router.push(`/post/${Math.random()}`)
+    }} className={styles["card-container"]}>
       <p>Text</p>
       <div>
         <div className="text-gray-10 text-sm">3 min ago</div>

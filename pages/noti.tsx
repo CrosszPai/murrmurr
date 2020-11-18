@@ -16,7 +16,13 @@ function Notification() {
         <h4 className="text-xl mr-auto font-normal">NOTIFICATION</h4>
       </nav>
       <div className="p-4 flex-auto">
-        <NotificationCard />
+        <div style={{ maxHeight: "80vh" }} className="h-full overflow-auto">
+          {Array(10)
+            .fill(0)
+            .map((v, i) => {
+              return <NotificationCard key={i} />;
+            })}
+        </div>
       </div>
     </>
   );

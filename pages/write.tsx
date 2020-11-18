@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -10,7 +11,11 @@ function Write() {
   }, [textRef]);
   return (
     <>
-      <nav className="nav">
+      <motion.nav
+        initial={{ x: 10, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        className="nav"
+      >
         <i
           aria-hidden
           onClick={() => {
@@ -20,14 +25,14 @@ function Write() {
         ></i>
         <h4 className="text-base mr-auto ml-2 font-normal">CREATE POST</h4>
         <h4 className="text-mint-100">POST</h4>
-      </nav>
+      </motion.nav>
       <div className="flex-auto p-4">
         <textarea
           onChange={onChange}
           ref={textRef}
           maxLength={200}
           style={{
-            height: "50%",
+            height: "30%",
           }}
           className="text-gray-10 bg-transparent outline-none w-full resize-none"
         />
