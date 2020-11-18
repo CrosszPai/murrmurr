@@ -83,7 +83,7 @@ function PostPage() {
         <i
           aria-hidden={true}
           onClick={() => {
-            Router.push('/');
+            Router.push("/");
           }}
           className="mr-auto fa fa-chevron-left text-xl"
         ></i>
@@ -110,7 +110,7 @@ function PostPage() {
           toggleInput={toggleInput}
           onSuccess={() => {
             if (isToggle) {
-              animated
+              return animated
                 .start({
                   y: "-10vh",
                 })

@@ -19,13 +19,14 @@ const CommentBox = React.forwardRef(
     }: any,
     ref
   ) => {
+    const sendAnimate = useAnimation();
     const textRef = React.useRef<HTMLTextAreaElement>();
     const [len, setLength] = React.useState(0);
     const Router = useRouter();
     const onChange = React.useCallback(() => {
       setLength(textRef.current.value.length);
     }, [textRef]);
-    const submit = () => {
+    const submit = async () => {
       if (ownReply) {
         firebase
           .firestore()
@@ -70,15 +71,27 @@ const CommentBox = React.forwardRef(
         .update({
           replyCount: firebase.firestore.FieldValue.increment(1),
         });
-      onSuccess();
+      await onSuccess();
       textRef.current.value = "";
     };
+    React.useEffect(() => {
+      (async () => {
+        if (isToggle) {
+          await sendAnimate.start({
+            y: 200,
+          });
+        } else {
+          await sendAnimate.start({
+            y: 0,
+          });
+        }
+      })();
+    }, [isToggle]);
     return (
       <motion.div
         ref={ref as React.Ref<HTMLDivElement>}
         transition={spring}
         animate={animated}
-        onClick={toggleInput}
         style={{
           height: "40vh",
           bottom: "-40vh",
@@ -90,22 +103,30 @@ const CommentBox = React.forwardRef(
           <textarea
             onChange={onChange}
             ref={textRef}
+            onClick={() => {
+              toggleInput();
+            }}
             maxLength={200}
             placeholder="Add a comment..."
             className={styles["comment-box"]}
           />
-          <button
+          <motion.button
+            transition={{
+              delay: 0,
+              stiffness: 50,
+            }}
+            animate={sendAnimate}
             onClick={submit}
-            disabled={!isToggle}
+            className="outline-none"
             style={{ height: "fit-content" }}
           >
             <i
               aria-hidden
               className="fas mt-2 text-mint-100 fa-paper-plane"
             ></i>
-          </button>
+          </motion.button>
         </div>
-        <div className="ml-auto mt-auto text-mint-100 transform -translate-y-4">
+        <div className="mr-auto mt-4 text-mint-100 transform -translate-y-4">
           {len}/200
         </div>
       </motion.div>

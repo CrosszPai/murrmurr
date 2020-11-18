@@ -55,8 +55,6 @@ function PostDetail(props: PostDetailProps) {
                 <h4 className="text-base">{rep.userName}</h4>
                 <p className="text-xs text-gray-50">
                   {moment(rep.createAt).fromNow()}
-                  {Icon[rep.Icon]}
-                  {rep.Icon}
                 </p>
               </div>
             </div>

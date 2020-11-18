@@ -2,7 +2,7 @@
     "name": "MurMur",
     "short_name": "Murr",
     "theme_color": "#ffffff",
-    "background_color": "#242529",
+    "background_color": "#000000",
     "display": "fullscreen",
     "orientation": "portrait",
     "scope": "/",
