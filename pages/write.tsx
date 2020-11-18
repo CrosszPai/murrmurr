@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import React from "react";
+import firebase from "../firebase/clientApp";
+import { post } from "../types";
 
 function Write() {
   const Router = useRouter();
@@ -9,6 +12,26 @@ function Write() {
   const onChange = React.useCallback(() => {
     setLength(textRef.current.value.length);
   }, [textRef]);
+
+  const submit = async () => {
+    try {
+      const res = await firebase
+        .firestore()
+        .collection("post")
+        .add({
+          campus: "KMITL",
+          content: textRef.current.value,
+          userId: localStorage.getItem("uid"),
+          createAt: firebase.firestore.FieldValue.serverTimestamp() as any,
+          userName: nanoid()
+        } as post);
+      console.log(res);
+      textRef.current.value = "";
+    } catch (error) {
+      console.log(error);
+    }
+    onChange()
+  };
   return (
     <>
       <motion.nav
@@ -24,7 +47,9 @@ function Write() {
           className="fa fa-chevron-left text-xl"
         ></i>
         <h4 className="text-base mr-auto ml-2 font-normal">CREATE POST</h4>
-        <h4 className="text-mint-100">POST</h4>
+        <h4 onClick={submit} className="text-mint-100 cursor-pointer">
+          POST
+        </h4>
       </motion.nav>
       <div className="flex-auto p-4">
         <textarea

@@ -4,8 +4,32 @@ import Link from "next/link";
 
 import styles from "../styles/Home.module.css";
 import { motion } from "framer-motion";
+import React from "react";
+import firebase from "../firebase/clientApp";
 
 export default function IndexPage() {
+  const [posts, setPosts] = React.useState([]);
+  React.useEffect(() => {
+    firebase
+      .firestore()
+      .collection("post")
+      .onSnapshot((snap) => {
+        setPosts(
+          snap.docs
+            .map((val) => {
+              if (val.data().createAt !== null) {
+                return {
+                  id: val.id,
+                  ...val.data(),
+                  createAt: val.data().createAt.toDate(),
+                };
+              }
+              return null;
+            })
+            .filter((v) => v !== null)
+        );
+      });
+  }, []);
   return (
     <>
       <motion.nav
@@ -34,10 +58,10 @@ export default function IndexPage() {
         <h5 className="text-xl">Public</h5>
         <p>Lorem ipsum dolor sit amet,</p>
         <div className="flex-auto">
-          <div className="h-full overflow-auto" style={{maxHeight:'80vh'}}>
-            {new Array(10).fill(0).map((a, i) => (
-              <PostCard key={i} />
-            ))}
+          <div className="h-full overflow-auto" style={{ maxHeight: "80vh" }}>
+            {posts.map((post, index) => {
+              return <PostCard {...post} key={index} />;
+            })}
           </div>
         </div>
       </motion.div>

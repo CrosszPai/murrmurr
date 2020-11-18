@@ -1,7 +1,14 @@
 import "../styles/index.css";
 import Head from "next/head";
+import React from "react";
+import { nanoid } from "nanoid";
 
 function MyApp({ Component, pageProps }) {
+  React.useEffect(() => {
+    if (!localStorage.getItem("uid")) {
+      localStorage.setItem("uid", nanoid());
+    }
+  }, []);
   return (
     <>
       <Head>

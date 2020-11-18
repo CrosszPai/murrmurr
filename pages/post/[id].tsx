@@ -4,12 +4,49 @@ import React from "react";
 import CommentBox from "../../components/CommentBox";
 import PostDetial from "../../components/PostDetail";
 import useClickOutside from "../../hooks/useClickOutside";
+import firebase from "../../firebase/clientApp";
 
 function PostPage() {
   const animated = useAnimation();
   const [isToggle, setToggle] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>();
   const Router = useRouter();
+  const [post, setPost] = React.useState<any>();
+  const [reply, setReply] = React.useState([]);
+  React.useEffect(() => {
+    if (Router.query["id"]) {
+      firebase
+        .firestore()
+        .collection("post")
+        .doc(Router.query["id"] as string)
+        .onSnapshot((snap) => {
+          setPost({
+            ...snap.data(),
+            createAt: snap.data().createAt.toDate(),
+          });
+        });
+      firebase
+        .firestore()
+        .collection("reply")
+        .where("postRef", "==", Router.query["id"])
+        .onSnapshot((snap) => {
+          setReply(() => {
+            const temp = snap.docs.map((val) => {
+              if (val.data().createAt) {
+                return {
+                  id: val.id,
+                  ...val.data(),
+                  createAt: val.data().createAt.toDate(),
+                };
+              }
+              return null;
+            });
+
+            return temp.filter((v) => v !== null);
+          });
+        });
+    }
+  }, [Router.query]);
   useClickOutside(ref, null, () => {
     console.log("asd");
     if (isToggle) {
@@ -33,6 +70,9 @@ function PostPage() {
         });
     }
   };
+  if(!post){
+    return <></>
+  }
   return (
     <>
       <motion.nav
@@ -54,13 +94,15 @@ function PostPage() {
         animate={{ opacity: 1, x: 0 }}
         className="flex-auto p-4"
       >
-        <PostDetial />
+        <PostDetial {...post} reply={reply} />
       </motion.div>
       <motion.div
         animate={{ y: 0, opacity: 1 }}
         initial={{ y: 10, opacity: 0 }}
       >
         <CommentBox
+          userName={post.userName}
+          ownReply={reply.find((v) => v.userId === localStorage.getItem("uid"))}
           ref={ref}
           isToggle={isToggle}
           animated={animated}
