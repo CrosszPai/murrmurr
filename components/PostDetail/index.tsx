@@ -36,7 +36,7 @@ function PostDetail(props: PostDetailProps) {
           </p>
         </div>
       </div>
-      <p className="mb-4">{props.content}</p>
+      <p className="mb-4 break-all">{props.content}</p>
       <div
         style={{ maxHeight: "60vh" }}
         className="pl-6 border-l border-white flex-auto overflow-auto"

@@ -17,7 +17,7 @@ export default function IndexPage() {
     firebase
       .firestore()
       .collection("post")
-      .where("campus", "==", localStorage.getItem("cmp"))
+      .where("campus", "==", localStorage.getItem("cmp") || "PUBLIC")
       .onSnapshot((snap) => {
         setPosts(() => {
           let temp = snap.docs
