@@ -1,9 +1,20 @@
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import React from "react";
 import CampusList from "../components/CampusList";
 
 function Campus() {
   const Router = useRouter();
+  const [campus, setCampus] = React.useState("PUBLIC");
+  React.useEffect(() => {
+    if (localStorage.getItem("cmp")) {
+      setCampus(localStorage.getItem("cmp"));
+    }
+  }, []);
+  const warp = () => {
+    localStorage.setItem("cmp", campus);
+    Router.back()
+  };
   return (
     <>
       <motion.nav
@@ -19,8 +30,11 @@ function Campus() {
           className="fa fa-chevron-left text-xl text-gray-10 mr-2"
         ></i>
         <h4 className="text-base font-normal">SELECT CAMPUS</h4>
-        <button className="text-mint-100 outline-none ml-auto text-base">
-          WRAP
+        <button
+          onClick={warp}
+          className="text-mint-100 outline-none ml-auto text-base"
+        >
+          WARP
         </button>
       </motion.nav>
       <motion.div
@@ -30,7 +44,12 @@ function Campus() {
       >
         <h4 className="text-xl">Campus</h4>
         <p className="text-xs mb-8">Lorem ipsum dolor sit amet,</p>
-        <CampusList/>
+        <CampusList
+          onSelect={(v: string) => {
+            setCampus(v);
+          }}
+          campus={campus}
+        />
       </motion.div>
     </>
   );

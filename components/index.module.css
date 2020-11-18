@@ -1,5 +1,5 @@
 .write-btn {
-  @apply fixed rounded-full bg-black text-white bottom-0 right-0 mb-10 mr-4;
+  @apply fixed rounded-full bg-mint-100 text-white bottom-0 right-0 mb-10 mr-4;
 }
 .write-btn:focus,
 .write-btn:active {

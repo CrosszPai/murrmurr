@@ -9,10 +9,13 @@ import firebase from "../firebase/clientApp";
 
 export default function IndexPage() {
   const [posts, setPosts] = React.useState([]);
+  const [defaultVal, setDefualt] = React.useState("");
   React.useEffect(() => {
+    setDefualt(localStorage.getItem("cmp") || "PUBLIC");
     firebase
       .firestore()
       .collection("post")
+      .where("campus", "==", localStorage.getItem("cmp"))
       .onSnapshot((snap) => {
         setPosts(
           snap.docs
@@ -38,7 +41,7 @@ export default function IndexPage() {
         className="nav"
       >
         <Link href="/">
-          <h4 className="brand">KMITL</h4>
+          <h4 className="brand">{defaultVal}</h4>
         </Link>
         <Link href="/campus">
           <i
@@ -47,7 +50,14 @@ export default function IndexPage() {
           ></i>
         </Link>
         <Link href="/noti">
-          <i aria-hidden className="fa fa-bell ml-auto text-white text-xl"></i>
+          <div className="ml-auto relative">
+            <i aria-hidden className="fa fa-bell  text-white text-xl"></i>
+            <i
+              aria-hidden
+              style={{ fontSize: "0.5rem",left:'50%'}}
+              className="absolute fa fa-circle text-mint-100 "
+            ></i>
+          </div>
         </Link>
       </motion.nav>
       <motion.div
@@ -55,8 +65,8 @@ export default function IndexPage() {
         initial={{ x: -10, opacity: 0 }}
         className={styles["page-container"]}
       >
-        <h5 className="text-xl">Public</h5>
-        <p>Lorem ipsum dolor sit amet,</p>
+        <h5 className="text-xl">Welcome</h5>
+        <p>Nice to not meet you.</p>
         <div className="flex-auto">
           <div className="h-full overflow-auto" style={{ maxHeight: "80vh" }}>
             {posts.map((post, index) => {

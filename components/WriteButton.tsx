@@ -4,7 +4,7 @@ function WriteButton() {
   const Router = useRouter();
   return (
     <button onClick={()=>Router.push('/write')} className={styles["write-btn"]}>
-      <i aria-hidden className="p-4 fa fa-pen"></i>
+      <i aria-hidden className="p-4 fa fa-pen text-black"></i>
     </button>
   );
 }

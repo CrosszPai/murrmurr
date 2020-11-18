@@ -70,8 +70,8 @@ function PostPage() {
         });
     }
   };
-  if(!post){
-    return <></>
+  if (!post) {
+    return <></>;
   }
   return (
     <>
@@ -102,11 +102,23 @@ function PostPage() {
       >
         <CommentBox
           userName={post.userName}
+          post={post}
           ownReply={reply.find((v) => v.userId === localStorage.getItem("uid"))}
           ref={ref}
           isToggle={isToggle}
           animated={animated}
           toggleInput={toggleInput}
+          onSuccess={() => {
+            if (isToggle) {
+              animated
+                .start({
+                  y: "-10vh",
+                })
+                .then(() => {
+                  setToggle(false);
+                });
+            }
+          }}
         />
       </motion.div>
     </>

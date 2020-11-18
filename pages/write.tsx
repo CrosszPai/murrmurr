@@ -19,18 +19,20 @@ function Write() {
         .firestore()
         .collection("post")
         .add({
-          campus: "KMITL",
+          campus: localStorage.getItem("cmp"),
           content: textRef.current.value,
           userId: localStorage.getItem("uid"),
           createAt: firebase.firestore.FieldValue.serverTimestamp() as any,
-          userName: nanoid()
+          userName: nanoid(),
+          replyCount: 0,
         } as post);
       console.log(res);
       textRef.current.value = "";
     } catch (error) {
       console.log(error);
     }
-    onChange()
+    onChange();
+    Router.back();
   };
   return (
     <>

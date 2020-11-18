@@ -8,6 +8,9 @@ function MyApp({ Component, pageProps }) {
     if (!localStorage.getItem("uid")) {
       localStorage.setItem("uid", nanoid());
     }
+    if (!localStorage.getItem("cmp")) {
+      localStorage.setItem("cmp", "PUBLIC");
+    }
   }, []);
   return (
     <>

@@ -28,7 +28,7 @@ function PostCard(props: PostCardProps) {
         <div className="text-gray-10 text-sm">
           {moment(props.createAt).fromNow()}
         </div>
-        <div className="ml-auto">{props.replyCount}</div>
+        <div className="ml-auto">{props.replyCount || "0"}</div>
         <i aria-hidden className="fas ml-2 fa-comment-alt text-gray-50" />
       </div>
     </motion.div>
