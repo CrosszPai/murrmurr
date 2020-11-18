@@ -1,0 +1,16 @@
+.write-btn {
+  @apply fixed rounded-full bg-black text-white bottom-0 right-0 mb-10 mr-4;
+}
+.write-btn:focus,
+.write-btn:active {
+  @apply outline-none;
+}
+.card-container {
+  @apply p-4 rounded-2xl w-full text-white bg-gray-80 my-2;
+}
+.card-container > p {
+  @apply mb-8 text-base;
+}
+.card-container > div {
+  @apply flex w-full text-gray-10 items-center;
+}
