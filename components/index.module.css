@@ -14,3 +14,13 @@
 .card-container > div {
   @apply flex w-full text-gray-10 items-center;
 }
+
+
+.comment-box {
+  height:200px;
+  @apply text-gray-10 outline-none bg-transparent resize-none w-full;
+}
+
+.comment-box::placeholder{
+  @apply text-gray-10;
+}

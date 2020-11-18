@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <script
           src="https://kit.fontawesome.com/a23231f90d.js"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         ></script>
       </Head>
       <Component {...pageProps} />
