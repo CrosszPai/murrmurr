@@ -15,4 +15,6 @@ export interface reply {
     postRef: string;
     userId: string;
     userName: string;
+    createId: string;
+    postContent: String;
 }

@@ -32,7 +32,7 @@ function Write() {
       console.log(error);
     }
     onChange();
-    Router.back();
+    Router.push('/');
   };
   return (
     <>
@@ -44,7 +44,7 @@ function Write() {
         <i
           aria-hidden
           onClick={() => {
-            Router.back();
+            Router.push('/');
           }}
           className="fa fa-chevron-left text-xl"
         ></i>

@@ -83,7 +83,7 @@ function PostPage() {
         <i
           aria-hidden={true}
           onClick={() => {
-            Router.back();
+            Router.push('/');
           }}
           className="mr-auto fa fa-chevron-left text-xl"
         ></i>

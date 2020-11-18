@@ -6,8 +6,10 @@ import styles from "../styles/Home.module.css";
 import { motion } from "framer-motion";
 import React from "react";
 import firebase from "../firebase/clientApp";
+import NotificationContext from "../context/notification";
 
 export default function IndexPage() {
+  const { noti, readed, setReaded } = React.useContext(NotificationContext);
   const [posts, setPosts] = React.useState([]);
   const [defaultVal, setDefualt] = React.useState("");
   React.useEffect(() => {
@@ -52,11 +54,16 @@ export default function IndexPage() {
         <Link href="/noti">
           <div className="ml-auto relative">
             <i aria-hidden className="fa fa-bell  text-white text-xl"></i>
-            <i
-              aria-hidden
-              style={{ fontSize: "0.5rem",left:'50%'}}
-              className="absolute fa fa-circle text-mint-100 "
-            ></i>
+            {!readed && (
+              <i
+                aria-hidden
+                onClick={() => {
+                  setReaded(true);
+                }}
+                style={{ fontSize: "0.5rem", left: "50%" }}
+                className="absolute fa fa-circle text-mint-100 "
+              ></i>
+            )}
           </div>
         </Link>
       </motion.nav>

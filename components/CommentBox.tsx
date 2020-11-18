@@ -41,6 +41,8 @@ const CommentBox = React.forwardRef(
               post.userId === localStorage.getItem("uid")
                 ? post.userName
                 : ownReply.userName,
+            createId: post.userId,
+            postContent: post.content,
           } as reply);
       } else {
         firebase
@@ -57,6 +59,8 @@ const CommentBox = React.forwardRef(
             userId: localStorage.getItem("uid"),
             userName:
               post.userId === localStorage.getItem("uid") ? userName : nanoid(),
+            createId: post.userId,
+            postContent: post.content,
           } as reply);
       }
       firebase

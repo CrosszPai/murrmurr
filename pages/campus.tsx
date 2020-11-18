@@ -13,7 +13,7 @@ function Campus() {
   }, []);
   const warp = () => {
     localStorage.setItem("cmp", campus);
-    Router.back()
+    Router.push('/')
   };
   return (
     <>
@@ -25,7 +25,7 @@ function Campus() {
         <i
           aria-hidden={true}
           onClick={() => {
-            Router.back();
+            Router.push('/');
           }}
           className="fa fa-chevron-left text-xl text-gray-10 mr-2"
         ></i>
