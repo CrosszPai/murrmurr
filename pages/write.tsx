@@ -10,10 +10,13 @@ function Write() {
   const textRef = React.useRef<HTMLTextAreaElement>();
   const [len, setLength] = React.useState(0);
   const onChange = React.useCallback(() => {
-    setLength(textRef.current.value.length);
+    setLength(textRef.current.value.trim().length);
   }, [textRef]);
 
   const submit = async () => {
+    if (len < 1) {
+      return;
+    }
     try {
       const res = await firebase
         .firestore()
@@ -32,7 +35,7 @@ function Write() {
       console.log(error);
     }
     onChange();
-    Router.push('/');
+    Router.push("/");
   };
   return (
     <>
@@ -44,12 +47,17 @@ function Write() {
         <i
           aria-hidden
           onClick={() => {
-            Router.push('/');
+            Router.push("/");
           }}
           className="fa fa-chevron-left text-xl"
         ></i>
         <h4 className="text-base mr-auto ml-2 font-normal">CREATE POST</h4>
-        <h4 onClick={submit} className="text-mint-100 cursor-pointer">
+        <h4
+          onClick={submit}
+          className={`${
+            len > 0 ? "text-mint-100" : "text-gray-40"
+          } cursor-pointer`}
+        >
           POST
         </h4>
       </motion.nav>
