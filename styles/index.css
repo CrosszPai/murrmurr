@@ -17,3 +17,23 @@ html {
 .nav {
   @apply w-screen p-4 flex items-center justify-center text-white;
 }
+
+div::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+div::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+/* Handle */
+div::-webkit-scrollbar-thumb {
+  @apply bg-mint-100 rounded-2xl;
+}
+
+/* Handle on hover */
+div::-webkit-scrollbar-thumb:hover {
+  background: #00b8a5;
+  @apply rounded-2xl;
+}

@@ -73,6 +73,7 @@ const CommentBox = React.forwardRef(
         });
       await onSuccess();
       textRef.current.value = "";
+      setLength(0);
     };
     React.useEffect(() => {
       (async () => {
