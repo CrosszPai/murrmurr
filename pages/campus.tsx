@@ -43,7 +43,7 @@ function Campus() {
         className="p-4 flex-auto text-gray-10"
       >
         <h4 className="text-xl">Campus</h4>
-        <p className="text-xs mb-8">Lorem ipsum dolor sit amet,</p>
+        <p className="text-xs mb-8">Choose your battlefield</p>
         <CampusList
           onSelect={(v: string) => {
             setCampus(v);

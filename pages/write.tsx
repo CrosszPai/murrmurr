@@ -31,6 +31,7 @@ function Write() {
         } as post);
       console.log(res);
       textRef.current.value = "";
+      setLength(0);
     } catch (error) {
       console.log(error);
     }
