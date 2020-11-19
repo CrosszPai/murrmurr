@@ -123,7 +123,9 @@ const CommentBox = React.forwardRef(
           >
             <i
               aria-hidden
-              className={`fas mt-2 text-mint-100 fa-paper-plane`}
+              className={`fas mt-2 ${
+                len > 1 ? " text-mint-100" : "text-gray-40"
+              } fa-paper-plane`}
             ></i>
           </motion.button>
         </div>
